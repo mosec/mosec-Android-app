@@ -5,12 +5,23 @@
     android:versionName="1.0">
 
     <uses-sdk android:minSdkVersion="8"/>
+    
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
 
     <application
+        android:name=".MosecApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/application_name">
+        <meta-data android:name="AA_DB_NAME" android:value="mosec.db"/>
+        <meta-data android:name="AA_DB_VERSION" android:value="1"/>
+        
         <activity
             android:name=".MosecActivity"
+            android:noHistory="true"
             android:label="@string/application_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -18,5 +29,18 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".WelcomeActivity"/>
+        <activity android:name=".SignInActivity"/>
+        <activity android:name=".HomeActivity"/>
+        
+        <service
+		    android:enabled="true"
+		    android:name=".SynchronizationService"/>
+        
+        <receiver android:name=".receivers.BootCompletedReceiver">
+        	<intent-filter>
+            	<action android:name="android.intent.action.BOOT_COMPLETED"/>
+        	</intent-filter>
+        </receiver>
     </application>
 </manifest>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <PreferenceCategory
+        android:key="dashboard_preference_category"
+        android:title="@string/dashboard_preference_category_title">
+        
+        <EditTextPreference
+            android:key="calls_edit_text_preference"
+            android:title="@string/calls_edit_text_preference_title"
+            android:summary="@string/calls_edit_text_preference_summary"/>
+        
+  		<EditTextPreference
+     		android:key="text_messages_edit_text_preference"
+     		android:title="@string/text_messages_edit_text_preference_title"
+     		android:summary="@string/text_messages_edit_text_preference_summary"/>
+  		
+  		<EditTextPreference
+     		android:key="calendar_events_edit_text_preference"
+     		android:title="@string/calendar_events_edit_text_preference_title"
+     		android:summary="@string/calendar_events_edit_text_preference_summary"/>
+ 	</PreferenceCategory>
+</PreferenceScreen>

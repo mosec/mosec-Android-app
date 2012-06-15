@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Application-wide -->
     <string name="application_name">Mosec</string>
+    <string name="progress_dialog_title"></string>
+    <string name="progress_dialog_message">Contacting Mosec</string>
+    <string name="positive_alert_dialog_button_text">OK</string>
+    
+    <!-- WelcomeActivity -->
+    <string name="go_to_sign_in_button">Sign in</string>
+    
+    <!-- SignInActivity -->
+    <string name="sign_in_text_view">Sign In</string>
+    <string name="sign_in_email_address_edit_text_hint">Email address</string>
+    <string name="sign_in_password_edit_text_hint">Password</string>
+    <string name="sign_in_button">Sign in</string>
+    
+    <!-- HomeActivity -->
+    <string name="dashboard_preference_category_title">Dashboard</string>
+    <string name="calls_edit_text_preference_title">Calls</string>
+    <string name="calls_edit_text_preference_summary">Calls are being indexed</string>
+    <string name="text_messages_edit_text_preference_title">Messages</string>
+    <string name="text_messages_edit_text_preference_summary">Messages are being indexed</string>
+    <string name="calendar_events_edit_text_preference_title">Calendar events</string>
+    <string name="calendar_events_edit_text_preference_summary">Calendar events are being indexed</string>
+    <string name="logout_option_title">Logout</string>
 </resources>
