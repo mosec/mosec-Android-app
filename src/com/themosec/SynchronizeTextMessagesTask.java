@@ -22,7 +22,8 @@ public class SynchronizeTextMessagesTask extends AsyncTask<ContentResolver, Void
 		RequestParams parameters = new RequestParams();
 		
 		String textMessagesJsonString = textMessagesJson.toString();
-		
+
+		parameters.put(DataManager.CONTACTABLE_TYPE_PARAMETER_NAME, DataManager.CONTACTABLE_TYPE);
 		parameters.put(DataManager.DATA_TYPE_PARAMETER_NAME, TextMessage.TYPE);
 		parameters.put(DataManager.DATA_PARAMETER_NAME, textMessagesJsonString);
 		
