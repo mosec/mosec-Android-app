@@ -10,7 +10,7 @@ import android.net.Uri;
 import android.os.Handler;
 
 public class DataManager {
-	public static final String SYNCHRONIZE_ROUTE = "/data/synchronize";
+	public static final String SYNCHRONIZE_ROUTE = "/data/synchronize.json";
 	
 	public static final String DATA_TYPE_PARAMETER_NAME = "data[type]";
 	public static final String DATA_PARAMETER_NAME = "data[data]";
