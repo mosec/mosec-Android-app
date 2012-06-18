@@ -4,6 +4,11 @@
     <PreferenceCategory
         android:key="dashboard_preference_category"
         android:title="@string/dashboard_preference_category_title">
+
+        <EditTextPreference
+            android:key="contacts_edit_text_preference"
+            android:title="@string/contacts_edit_text_preference_title"
+            android:summary="@string/contacts_edit_text_preference_summary"/>
         
         <EditTextPreference
             android:key="calls_edit_text_preference"

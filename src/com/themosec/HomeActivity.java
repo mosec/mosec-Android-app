@@ -16,6 +16,7 @@ public class HomeActivity extends PreferenceActivity {
 	private Context mContext;
 	
 	private PreferenceCategory mDashboardPreferenceCategory;
+	private EditTextPreference mContactsEditTextPreference;
 	private EditTextPreference mCallsEditTextPreference;
 	private EditTextPreference mTextMessagesEditTextPreference;
 	private EditTextPreference mCalendarEventsEditTextPreference;
@@ -29,16 +30,22 @@ public class HomeActivity extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.home);
 		
 		mDashboardPreferenceCategory = (PreferenceCategory)findPreference("dashboard_preference_category");
+		mContactsEditTextPreference = (EditTextPreference)findPreference("contacts_edit_text_preference");
 		mCallsEditTextPreference = (EditTextPreference)findPreference("calls_edit_text_preference");
 		mTextMessagesEditTextPreference = (EditTextPreference)findPreference("text_messages_edit_text_preference");
 		mCalendarEventsEditTextPreference = (EditTextPreference)findPreference("calendar_events_edit_text_preference");
 
 		mDashboardPreferenceCategory.setTitle(mDashboardPreferenceCategory.getTitle().toString() + " for " + User.getCurrentUser().getEmailAddress());
-		
+
+		mContactsEditTextPreference.setSelectable(false);
 		mCallsEditTextPreference.setSelectable(false);
 		mTextMessagesEditTextPreference.setSelectable(false);
 		mCalendarEventsEditTextPreference.setSelectable(false);
 		
+		if(!DataManager.sContactsUriValid) {
+			mContactsEditTextPreference.setSummary("Contacts cannot be indexed");
+			mContactsEditTextPreference.setEnabled(false);
+		}
 		if(!DataManager.sCallsUriValid) {
 			mCallsEditTextPreference.setSummary("Calls cannot be indexed");
 			mCallsEditTextPreference.setEnabled(false);

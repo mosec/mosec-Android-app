@@ -17,6 +17,8 @@
     
     <!-- HomeActivity -->
     <string name="dashboard_preference_category_title">Dashboard</string>
+    <string name="contacts_edit_text_preference_title">Contacts</string>
+    <string name="contacts_edit_text_preference_summary">Contacts are being indexed</string>
     <string name="calls_edit_text_preference_title">Calls</string>
     <string name="calls_edit_text_preference_summary">Calls are being indexed</string>
     <string name="text_messages_edit_text_preference_title">Messages</string>
