@@ -83,6 +83,10 @@ public class HomeActivity extends PreferenceActivity {
 			Intent welcomeIntent = new Intent(mContext, WelcomeActivity.class);
 		
 			startActivity(welcomeIntent);
+			
+			Intent synchronizationIntent = new Intent(mContext, SynchronizationService.class);
+			
+			stopService(synchronizationIntent);
 		
 			finish();
 			
