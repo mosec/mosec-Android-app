@@ -1,7 +1,10 @@
 package com.themosec;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
@@ -11,21 +14,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class HomeActivity extends PreferenceActivity {
-	public static final String IN_ACTION = "com.getmosec.actions.IN_ACTION";
+	public static final String IN_ACTION = "com.themosec.actions.IN_ACTION";
 
 	private Context mContext;
+	private Resources mResources;
 	
 	private PreferenceCategory mDashboardPreferenceCategory;
 	private EditTextPreference mContactsEditTextPreference;
 	private EditTextPreference mCallsEditTextPreference;
 	private EditTextPreference mTextMessagesEditTextPreference;
 	private EditTextPreference mCalendarEventsEditTextPreference;
+
+    private BroadcastReceiver mListeningBroadcastReceiver;
+    private IntentFilter mListeningIntentFilter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		mContext = (Context)this;
+		mResources = mContext.getResources();
 		
 		addPreferencesFromResource(R.xml.home);
 		
@@ -42,22 +50,41 @@ public class HomeActivity extends PreferenceActivity {
 		mTextMessagesEditTextPreference.setSelectable(false);
 		mCalendarEventsEditTextPreference.setSelectable(false);
 		
-		if(!DataManager.sContactsUriValid) {
-			mContactsEditTextPreference.setSummary("Contacts cannot be indexed");
-			mContactsEditTextPreference.setEnabled(false);
-		}
-		if(!DataManager.sCallsUriValid) {
-			mCallsEditTextPreference.setSummary("Calls cannot be indexed");
-			mCallsEditTextPreference.setEnabled(false);
-		}
-		if(!DataManager.sTextMessagesUriValid) {
-			mTextMessagesEditTextPreference.setSummary("Messages cannot be indexed");
-			mTextMessagesEditTextPreference.setEnabled(false);
-		}
-		if(!DataManager.sCalendarEventsUriValid) {
-			mCalendarEventsEditTextPreference.setSummary("Calendar events cannot be indexed");
-			mCalendarEventsEditTextPreference.setEnabled(false);
-		}
+    	mContactsEditTextPreference.setEnabled(false);
+    	mCallsEditTextPreference.setEnabled(false);
+    	mTextMessagesEditTextPreference.setEnabled(false);
+    	mCalendarEventsEditTextPreference.setEnabled(false);
+		
+		mListeningBroadcastReceiver = new BroadcastReceiver() {
+	        @Override
+	        public void onReceive(Context context, Intent intent) {
+	        	boolean listeningToContactsUri = intent.getBooleanExtra(DataManager.LISTENING_TO_CONTACTS_URI_KEY, false);
+	        	boolean listeningToCallsUri = intent.getBooleanExtra(DataManager.LISTENING_TO_CALLS_URI_KEY, false);
+	        	boolean listeningToTextMessagesUri = intent.getBooleanExtra(DataManager.LISTENING_TO_TEXT_MESSAGES_URI_KEY, false);
+	        	boolean listeningToCalendarEventsUri = intent.getBooleanExtra(DataManager.LISTENING_TO_CALENDAR_EVENTS_URI_KEY, false);
+	        	
+	            if(listeningToContactsUri) {
+	            	mContactsEditTextPreference.setSummary(mResources.getString(R.string.contacts_edit_text_preference_positive_summary));
+	            	mContactsEditTextPreference.setEnabled(true);
+	            }
+	            if(listeningToCallsUri) {
+	            	mCallsEditTextPreference.setSummary(mResources.getString(R.string.calls_edit_text_preference_positive_summary));
+	            	mCallsEditTextPreference.setEnabled(true);
+	            }
+	            if(listeningToTextMessagesUri) {
+	            	mTextMessagesEditTextPreference.setSummary(mResources.getString(R.string.text_messages_edit_text_preference_positive_summary));
+	            	mTextMessagesEditTextPreference.setEnabled(true);
+	            }
+	            if(listeningToCalendarEventsUri) {
+	            	mCalendarEventsEditTextPreference.setSummary(mResources.getString(R.string.calendar_events_edit_text_preference_positive_summary));
+	            	mCalendarEventsEditTextPreference.setEnabled(true);
+	            }
+	        }
+	    };
+		
+		mListeningIntentFilter = new IntentFilter(DataManager.LISTENING_ACTION);
+
+        registerReceiver(mListeningBroadcastReceiver, mListeningIntentFilter);
 	}
 	
 	@Override
@@ -101,5 +128,12 @@ public class HomeActivity extends PreferenceActivity {
 	    }
 		
 		return true;
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		
+		unregisterReceiver(mListeningBroadcastReceiver);
 	}
 }

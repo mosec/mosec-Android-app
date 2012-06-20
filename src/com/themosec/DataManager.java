@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
@@ -15,10 +16,17 @@ public class DataManager {
 	public static final String DATA_TYPE_PARAMETER_NAME = "data[type]";
 	public static final String DATA_PARAMETER_NAME = "data[data]";
 	
-	public static boolean sContactsUriValid = false;
-	public static boolean sCallsUriValid = false;
-	public static boolean sTextMessagesUriValid = false;
-	public static boolean sCalendarEventsUriValid = false;
+	public static final String LISTENING_ACTION = "com.themosec.actions.LISTENING_ACTION";
+	
+	public static final String LISTENING_TO_CONTACTS_URI_KEY = "LISTENING_TO_CONTACTS_URI";
+	public static final String LISTENING_TO_CALLS_URI_KEY = "LISTENING_TO_CALLS_URI";
+	public static final String LISTENING_TO_TEXT_MESSAGES_URI_KEY = "LISTENING_TO_TEXT_MESSAGES_URI";
+	public static final String LISTENING_TO_CALENDAR_EVENTS_URI_KEY = "LISTENING_TO_CALENDAR_EVENTS_URI";
+	
+	public static boolean sListeningToContactsUri = false;
+	public static boolean sListeningToCallsUri = false;
+	public static boolean sListeningToTextMessagesUri = false;
+	public static boolean sListeningToCalendarEventsUri = false;
 	
 	private static final Uri[] URIS_TO_BE_TESTED = { Contact.CONTACTS_URI, Call.CALLS_URI, TextMessage.TEXT_MESSAGES_URI, CalendarEvent.CALENDARS_URI };
 	
@@ -44,16 +52,6 @@ public class DataManager {
 				uriCursor = sContentResolver.query(uriToBeTested, null, null, null, null);
 
 				uriCursor.close();
-				
-				if(uriToBeTested == Contact.CONTACTS_URI) {
-					sContactsUriValid = true;
-				} else if(uriToBeTested == Call.CALLS_URI) {
-					sCallsUriValid = true;
-				} else if(uriToBeTested == TextMessage.TEXT_MESSAGES_URI) {
-					sTextMessagesUriValid = true;
-				} else if(uriToBeTested == CalendarEvent.CALENDARS_URI) {
-					sCalendarEventsUriValid = true;
-				}
 
 				sUris.add(uriToBeTested);
 			} catch(NullPointerException exception) {
@@ -74,8 +72,31 @@ public class DataManager {
 		for(int i = 0; i < sContentObservers.size(); i++) {
 			MosecContentObserver mosecContentObserver = sContentObservers.get(i);
 			
-			sContentResolver.registerContentObserver(sUris.get(i), true, mosecContentObserver);
+			Uri uri = sUris.get(i);
+			
+			sContentResolver.registerContentObserver(uri, true, mosecContentObserver);
+			
+			if(uri == Contact.CONTACTS_URI) {
+				sListeningToContactsUri = true;
+			} else if(uri == Call.CALLS_URI) {
+				sListeningToCallsUri = true;
+			} else if(uri == TextMessage.TEXT_MESSAGES_URI) {
+				sListeningToTextMessagesUri = true;
+			} else if(uri == CalendarEvent.CALENDARS_URI) {
+				sListeningToCalendarEventsUri = true;
+			}
 		}
+		
+		Intent broadcastIntent = new Intent();
+
+		broadcastIntent.setAction(LISTENING_ACTION);
+
+		broadcastIntent.putExtra(LISTENING_TO_CONTACTS_URI_KEY, sListeningToContactsUri);
+		broadcastIntent.putExtra(LISTENING_TO_CALLS_URI_KEY, sListeningToCallsUri);
+		broadcastIntent.putExtra(LISTENING_TO_TEXT_MESSAGES_URI_KEY, sListeningToTextMessagesUri);
+		broadcastIntent.putExtra(LISTENING_TO_CALENDAR_EVENTS_URI_KEY, sListeningToCalendarEventsUri);
+
+		sContext.sendBroadcast(broadcastIntent);
     }
     
     public static void destroy() {

@@ -18,12 +18,16 @@
     <!-- HomeActivity -->
     <string name="dashboard_preference_category_title">Dashboard</string>
     <string name="contacts_edit_text_preference_title">Contacts</string>
-    <string name="contacts_edit_text_preference_summary">Contacts are being indexed</string>
+    <string name="contacts_edit_text_preference_default_summary">Contacts cannot be indexed</string>
+    <string name="contacts_edit_text_preference_positive_summary">Contacts are being indexed</string>
     <string name="calls_edit_text_preference_title">Calls</string>
-    <string name="calls_edit_text_preference_summary">Calls are being indexed</string>
+    <string name="calls_edit_text_preference_default_summary">Calls cannot be indexed</string>
+    <string name="calls_edit_text_preference_positive_summary">Calls are being indexed</string>
     <string name="text_messages_edit_text_preference_title">Messages</string>
-    <string name="text_messages_edit_text_preference_summary">Messages are being indexed</string>
+    <string name="text_messages_edit_text_preference_default_summary">Messages cannot be indexed</string>
+    <string name="text_messages_edit_text_preference_positive_summary">Messages are being indexed</string>
     <string name="calendar_events_edit_text_preference_title">Calendar events</string>
-    <string name="calendar_events_edit_text_preference_summary">Calendar events are being indexed</string>
+    <string name="calendar_events_edit_text_preference_default_summary">Calendar events cannot be indexed</string>
+    <string name="calendar_events_edit_text_preference_positive_summary">Calendar events are being indexed</string>
     <string name="logout_option_title">Logout</string>
 </resources>

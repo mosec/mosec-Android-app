@@ -93,13 +93,6 @@ public class SignInActivity extends Activity implements View.OnKeyListener, View
 					
 					sendBroadcast(broadcastIntent);
 					
-					// To ensure the synchronization service is always on
-					if(!SynchronizationService.isStarted()) {
-						Intent synchronizationService = new Intent(mContext, SynchronizationService.class);
-						
-						startService(synchronizationService);	
-					}
-					
 					finish();
 
 					progressDialog.dismiss();
