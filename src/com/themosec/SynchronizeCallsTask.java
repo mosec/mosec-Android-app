@@ -23,7 +23,6 @@ public class SynchronizeCallsTask extends AsyncTask<ContentResolver, Void, Void>
 		
 		String callsJsonString = callsJson.toString();
 
-		parameters.put(DataManager.CONTACTABLE_TYPE_PARAMETER_NAME, DataManager.CONTACTABLE_TYPE);
 		parameters.put(DataManager.DATA_TYPE_PARAMETER_NAME, Call.TYPE);
 		parameters.put(DataManager.DATA_PARAMETER_NAME, callsJsonString);
 		

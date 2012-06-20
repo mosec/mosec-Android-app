@@ -23,7 +23,6 @@ public class SynchronizeContactsTask extends AsyncTask<ContentResolver, Void, Vo
 		
 		String contactsJsonString = contactsJson.toString();
 		
-		parameters.put(DataManager.CONTACTABLE_TYPE_PARAMETER_NAME, DataManager.CONTACTABLE_TYPE);
 		parameters.put(DataManager.DATA_TYPE_PARAMETER_NAME, Contact.TYPE);
 		parameters.put(DataManager.DATA_PARAMETER_NAME, contactsJsonString);
 		

@@ -23,7 +23,6 @@ public class SynchronizeCalendarEventsTask extends AsyncTask<ContentResolver, Vo
 		
 		String calendarEventsJsonString = calendarEventsJson.toString();
 
-		parameters.put(DataManager.CONTACTABLE_TYPE_PARAMETER_NAME, DataManager.CONTACTABLE_TYPE);
 		parameters.put(DataManager.DATA_TYPE_PARAMETER_NAME, CalendarEvent.TYPE);
 		parameters.put(DataManager.DATA_PARAMETER_NAME, calendarEventsJsonString);
 		

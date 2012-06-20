@@ -12,11 +12,8 @@ import android.os.Handler;
 public class DataManager {
 	public static final String SYNCHRONIZE_ROUTE = "/data/synchronize.json";
 
-	public static final String CONTACTABLE_TYPE_PARAMETER_NAME = "contactable_type";
 	public static final String DATA_TYPE_PARAMETER_NAME = "data[type]";
 	public static final String DATA_PARAMETER_NAME = "data[data]";
-	
-	public static final String CONTACTABLE_TYPE = "phone";
 	
 	public static boolean sContactsUriValid = false;
 	public static boolean sCallsUriValid = false;
