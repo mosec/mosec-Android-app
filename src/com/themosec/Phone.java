@@ -5,10 +5,10 @@ import android.content.Context;
 import android.provider.Settings;
 
 public class Phone {
-	public static final String PROVIDER_PARAMETER_NAME = "source[provider]";
-	public static final String UID_PARAMETER_NAME = "source[uid]";
+	public static final String UID_PARAMETER_NAME = "phone[uid]";
+	public static final String OPERATING_SYSTEM_PARAMETER_NAME = "phone[operating_system]";
 
-	public static final String PROVIDER ="android";
+	public static final String OPERATING_SYSTEM ="android";
 	
 	private static Phone sPhone = null;
 	

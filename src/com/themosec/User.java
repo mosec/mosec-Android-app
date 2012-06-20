@@ -98,8 +98,8 @@ public class User extends Model {
 		parameters.put(sUserSessionEmailAddressParameterName, mEmailAddress);
 		parameters.put(sUserSessionPasswordParameterName, mPassword);
 
-		parameters.put(Phone.PROVIDER_PARAMETER_NAME, Phone.PROVIDER);
 		parameters.put(Phone.UID_PARAMETER_NAME, Phone.getInstance(context).getUid());
+		parameters.put(Phone.OPERATING_SYSTEM_PARAMETER_NAME, Phone.OPERATING_SYSTEM);
 		
 		MosecClient.post(SIGN_IN_ROUTE, parameters, new JsonHttpResponseHandler() {
 			@Override
