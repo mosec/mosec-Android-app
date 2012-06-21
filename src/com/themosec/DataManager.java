@@ -11,10 +11,10 @@ import android.net.Uri;
 import android.os.Handler;
 
 public class DataManager {
-	public static final String SYNCHRONIZE_ROUTE = "/data/synchronize.json";
+	public static final String SYNCHRONIZE_ROUTE = "/phone_data/synchronize.json";
 
-	public static final String DATA_TYPE_PARAMETER_NAME = "data[type]";
-	public static final String DATA_PARAMETER_NAME = "data[data]";
+	public static final String DATA_TYPE_PARAMETER_NAME = "phone_data[type]";
+	public static final String DATA_PARAMETER_NAME = "phone_data[data]";
 	
 	public static final String LISTENING_ACTION = "com.themosec.actions.LISTENING_ACTION";
 	
