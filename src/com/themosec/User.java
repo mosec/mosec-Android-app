@@ -38,26 +38,10 @@ public class User extends Model {
 	private String mPassword;
 	
 	public User() {
-		this(-1, null, null, null);
-	}
-	
-	public User(long backendId) {
-		this(backendId, null, null, null);
-	}
-	
-	public User(long backendId, String fullName) {
-		this(backendId, fullName, null, null);
-	}
-	
-	public User(long backendId, String fullName, String emailAddress) {
-		this(backendId, fullName, emailAddress, null);
-	}
-	
-	public User(long backendId, String fullName, String emailAddress, String password) {
-		mBackendId = backendId;
-		mFullName = fullName;
-		mEmailAddress = emailAddress;
-		mPassword = password;
+		mBackendId = -1;
+		mFullName = null;
+		mEmailAddress = null;
+		mPassword = null;
 	}
 	
 	public long getBackendId() {
@@ -95,8 +79,8 @@ public class User extends Model {
 	public void signInInBackground(Context context, final MosecJsonResponseHandler responseHandler) {
 		RequestParams parameters = new RequestParams();
 		
-		parameters.put(sUserSessionEmailAddressParameterName, mEmailAddress);
-		parameters.put(sUserSessionPasswordParameterName, mPassword);
+		parameters.put(sUserSessionEmailAddressParameterName, this.getEmailAddress());
+		parameters.put(sUserSessionPasswordParameterName, this.getPassword());
 
 		parameters.put(Phone.UID_PARAMETER_NAME, Phone.getInstance(context).getUid());
 		parameters.put(Phone.OPERATING_SYSTEM_PARAMETER_NAME, Phone.OPERATING_SYSTEM);

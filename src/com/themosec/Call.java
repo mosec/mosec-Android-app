@@ -30,43 +30,19 @@ public class Call {
 	private static final String sTimeJsonKey = "time";
 	
 	private long mUid;
-	private String mCallType;
+	private int mCallType;
 	private String mFullName;
 	private String mPhoneNumber;
 	private long mDuration;
 	private long mTime;
 	
 	public Call() {
-		this(-1, null, null, null, -1, -1);
-	}
-	
-	public Call(long uid) {
-		this(uid, null, null, null, -1, -1);
-	}
-	
-	public Call(long uid, String callType) {
-		this(uid, callType, null, null, -1, -1);
-	}
-	
-	public Call(long uid, String callType, String fullName) {
-		this(uid, callType, fullName, null, -1 -1);
-	}
-	
-	public Call(long uid, String callType, String fullName, String phoneNumber) {
-		this(uid, callType, fullName, phoneNumber, -1, -1);
-	}
-	
-	public Call(long uid, String callType, String fullName, String phoneNumber, long duration) {
-		this(uid, callType, fullName, phoneNumber, duration, -1);
-	}
-	
-	public Call(long uid, String callType, String fullName, String phoneNumber, long duration, long time) {
-		mUid = uid;
-		mCallType = callType;
-		mFullName = fullName;
-		mPhoneNumber = phoneNumber;
-		mDuration = duration;
-		mTime = time / 1000;
+		mUid = -1;
+		mCallType = -1;
+		mFullName = null;
+		mPhoneNumber = null;
+		mDuration = -1;
+		mTime = -1;
 	}
 	
 	public long getUid() {
@@ -77,25 +53,12 @@ public class Call {
 		mUid = uid;
 	}
 	
-	public String getCallType() {
+	public int getCallType() {
 		return mCallType;
 	}
 	
 	public void setCallType(int callType) {
-		switch(callType) {
-		case CallLog.Calls.INCOMING_TYPE:
-			mCallType = sIncomingType;
-			
-			break;
-		case CallLog.Calls.OUTGOING_TYPE:
-			mCallType = sOutgoingType;
-			
-			break;
-		case CallLog.Calls.MISSED_TYPE:
-			mCallType = sMissedType;
-			
-			break;
-		}
+		mCallType = callType;
 	}
 	
 	public String getFullName() {
@@ -127,19 +90,37 @@ public class Call {
 	}
 	
 	public void setTime(long time) {
-		mTime = time / 1000;
+		mTime = time;
 	}
 	
 	public JSONObject toJson() {
 		JSONObject callJson = new JSONObject();
 		
 		try {
-			callJson.put(sUidJsonKey, mUid);
-			callJson.put(sCallTypeJsonKey, mCallType);
-			callJson.put(sFullNameJsonKey, mFullName);
-			callJson.put(sPhoneNumberJsonKey, mPhoneNumber);
-			callJson.put(sDurationJsonKey, mDuration);
-			callJson.put(sTimeJsonKey, mTime);
+			// Normalizing for backend
+			callJson.put(sUidJsonKey, String.valueOf(this.getUid()));
+
+			// Normalizing for backend
+			switch(this.getCallType()) {
+			case CallLog.Calls.INCOMING_TYPE:
+				callJson.put(sCallTypeJsonKey, sIncomingType);
+				
+				break;
+			case CallLog.Calls.OUTGOING_TYPE:
+				callJson.put(sCallTypeJsonKey, sOutgoingType);
+				
+				break;
+			case CallLog.Calls.MISSED_TYPE:
+				callJson.put(sCallTypeJsonKey, sMissedType);
+				
+				break;
+			}
+			
+			callJson.put(sFullNameJsonKey, this.getFullName());
+			callJson.put(sPhoneNumberJsonKey, this.getPhoneNumber());
+			callJson.put(sDurationJsonKey, this.getDuration());
+			// Normalizing for backend
+			callJson.put(sTimeJsonKey, this.getTime() / 1000);
 		} catch(JSONException exception) {
 			
 		}

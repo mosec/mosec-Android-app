@@ -42,43 +42,19 @@ public class TextMessage {
 	private static final String sTimeJsonKey = "time";
 	
 	private long mUid;
-	private String mTextMessageType;
+	private int mTextMessageType;
 	private long mThreadId;
 	private String mPhoneNumber;
 	private String mBody;
 	private long mTime;
 	
 	public TextMessage() {
-		this(-1, null, -1, null, null, -1);
-	}
-	
-	public TextMessage(long uid) {
-		this(uid, null, -1, null, null, -1);
-	}
-	
-	public TextMessage(long uid, String textMessageType) {
-		this(uid, textMessageType, -1, null, null, -1);
-	}
-	
-	public TextMessage(long uid, String textMessageType, long threadId) {
-		this(uid, textMessageType, threadId, null, null, -1);
-	}
-	
-	public TextMessage(long uid, String textMessageType, long threadId, String phoneNumber) {
-		this(uid, textMessageType, threadId, phoneNumber, null, -1);
-	}
-	
-	public TextMessage(long uid, String textMessageType, long threadId, String phoneNumber, String body) {
-		this(uid, textMessageType, threadId, phoneNumber, body, -1);
-	}
-	
-	public TextMessage(long uid, String textMessageType, long threadId, String phoneNumber, String body, long time) {
-		mUid = uid;
-		mTextMessageType = textMessageType;
-		mThreadId = threadId;
-		mPhoneNumber = phoneNumber;
-		mBody = body;
-		mTime = time / 1000;
+		mUid = -1;
+		mTextMessageType = -1;
+		mThreadId = -1;
+		mPhoneNumber = null;
+		mBody = null;
+		mTime = -1;
 	}
 	
 	public long getUid() {
@@ -89,41 +65,12 @@ public class TextMessage {
 		mUid = uid;
 	}
 	
-	public String getTextMessageType() {
+	public int getTextMessageType() {
 		return mTextMessageType;
 	}
 	
 	public void setTextMessageType(int textMessageType) {
-		switch(textMessageType) {
-		case sAllMessageType:
-			mTextMessageType = sAllType;
-			
-			break;
-		case sInboxMessageType:
-			mTextMessageType = sInboxType;
-			
-			break;
-		case sSentMessageType:
-			mTextMessageType = sSentType;
-			
-			break;
-		case sDraftMessageType:
-			mTextMessageType = sDraftType;
-			
-			break;
-		case sOutboxMessageType:
-			mTextMessageType = sOutboxType;
-			
-			break;
-		case sFailedMessageType:
-			mTextMessageType = sFailedType;
-			
-			break;
-		case sQueuedMessageType:
-			mTextMessageType = sQueuedType;
-			
-			break;
-		}
+		mTextMessageType = textMessageType;
 	}
 	
 	public long getThreadId() {
@@ -162,12 +109,46 @@ public class TextMessage {
 		JSONObject textMessageJson = new JSONObject();
 		
 		try {
-			textMessageJson.put(sUidJsonKey, mUid);
-			textMessageJson.put(sTextMessageTypeJsonKey, mTextMessageType);
-			textMessageJson.put(sThreadIdJsonKey, mThreadId);
-			textMessageJson.put(sPhoneNumberJsonKey, mPhoneNumber);
-			textMessageJson.put(sBodyJsonKey, mBody);
-			textMessageJson.put(sTimeJsonKey, mTime);
+			// Normalizing for backend
+			textMessageJson.put(sUidJsonKey, String.valueOf(this.getUid()));
+
+			// Normalizing for backend
+			switch(this.getTextMessageType()) {
+			case sAllMessageType:
+				textMessageJson.put(sTextMessageTypeJsonKey, sAllType);
+				
+				break;
+			case sInboxMessageType:
+				textMessageJson.put(sTextMessageTypeJsonKey, sInboxType);
+				
+				break;
+			case sSentMessageType:
+				textMessageJson.put(sTextMessageTypeJsonKey, sSentType);
+				
+				break;
+			case sDraftMessageType:
+				textMessageJson.put(sTextMessageTypeJsonKey, sDraftType);
+				
+				break;
+			case sOutboxMessageType:
+				textMessageJson.put(sTextMessageTypeJsonKey, sOutboxType);
+				
+				break;
+			case sFailedMessageType:
+				textMessageJson.put(sTextMessageTypeJsonKey, sFailedType);
+				
+				break;
+			case sQueuedMessageType:
+				textMessageJson.put(sTextMessageTypeJsonKey, sQueuedType);
+				
+				break;
+			}
+			
+			textMessageJson.put(sThreadIdJsonKey, this.getThreadId());
+			textMessageJson.put(sPhoneNumberJsonKey, this.getPhoneNumber());
+			textMessageJson.put(sBodyJsonKey, this.getBody());
+			// Normalizing for backend
+			textMessageJson.put(sTimeJsonKey, this.getTime() / 1000);
 		} catch(JSONException exception) {
 			
 		}

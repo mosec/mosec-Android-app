@@ -48,16 +48,8 @@ public class Contact implements Parcelable {
 	private List<EmailAddress> mEmailAddresses;
 	
 	public Contact() {
-		this(-1, null);
-	}
-	
-	public Contact(long uid) {
-		this(uid, null);
-	}
-	
-	public Contact(long uid, String fullName) {
-		mUid = uid;
-		mFullName = fullName;
+		mUid = -1;
+		mFullName = null;
 		mPhoneNumbers = new ArrayList<PhoneNumber>();
 		mEmailAddresses = new ArrayList<EmailAddress>();
 	}
@@ -128,14 +120,15 @@ public class Contact implements Parcelable {
 		JSONObject contactJson = new JSONObject();
 		
 		try {
-			contactJson.put(sUidJsonKey, mUid);
-			contactJson.put(sFullNameJsonKey, mFullName);
+			// Normalizing for backend
+			contactJson.put(sUidJsonKey, String.valueOf(this.getUid()));
+			contactJson.put(sFullNameJsonKey, this.getFullName());
 			
-			String phoneNumbersString = PhoneNumber.toStringFromPhoneNumbers(mPhoneNumbers);
+			String phoneNumbersString = PhoneNumber.toStringFromPhoneNumbers(this.getPhoneNumbers());
 			
 			contactJson.put(sPhoneNumbersJsonKey, phoneNumbersString);
 			
-			String emailAddressesString = EmailAddress.toStringFromEmailAddresses(mEmailAddresses);
+			String emailAddressesString = EmailAddress.toStringFromEmailAddresses(this.getEmailAddresses());
 			
 			contactJson.put(sEmailAddressesJsonKey, emailAddressesString);
 		} catch(JSONException exception) {

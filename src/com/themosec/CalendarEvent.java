@@ -38,46 +38,14 @@ public class CalendarEvent {
 	private boolean mAllDay;
 	
 	public CalendarEvent() {
-		this(-1, null, null, null, null, -1, -1, false);
-	}
-	
-	public CalendarEvent(long uid) {
-		this(uid, null, null, null, null, -1, -1, false);
-	}
-	
-	public CalendarEvent(long uid, String title) {
-		this(uid, title, null, null, null, -1, -1, false);
-	}
-	
-	public CalendarEvent(long uid, String title, String description) {
-		this(uid, title, description, null, null, -1, -1, false);
-	}
-	
-	public CalendarEvent(long uid, String title, String description, String location) {
-		this(uid, title, description, location, null, -1, -1, false);
-	}
-	
-	public CalendarEvent(long uid, String title, String description, String location, String attendeeEmailAddresses) {
-		this(uid, title, description, location, attendeeEmailAddresses, -1, -1, false);
-	}
-	
-	public CalendarEvent(long uid, String title, String description, String location, String attendeeEmailAddresses, long startTime) {
-		this(uid, title, description, location, attendeeEmailAddresses, startTime, -1, false);
-	}
-	
-	public CalendarEvent(long uid, String title, String description, String location, String attendeeEmailAddresses, long startTime, long endTime) {
-		this(uid, title, description, location, attendeeEmailAddresses, startTime, endTime, false);
-	}
-	
-	public CalendarEvent(long uid, String title, String description, String location, String attendeeEmailAddresses, long startTime, long endTime, boolean allDay) {
-		mUid = uid;
-		mTitle = title;
-		mDescription = description;
-		mLocation = location;
-		mAttendeeEmailAddresses = attendeeEmailAddresses;
-		mStartTime = startTime / 1000;
-		mEndTime = endTime / 1000;
-		mAllDay = allDay;
+		mUid = -1;
+		mTitle = null;
+		mDescription = null;
+		mLocation = null;
+		mAttendeeEmailAddresses = null;
+		mStartTime = -1;
+		mEndTime = -1;
+		mAllDay = false;
 	}
 	
 	public long getUid() {
@@ -125,7 +93,7 @@ public class CalendarEvent {
 	}
 	
 	public void setStartTime(long startTime) {
-		mStartTime = startTime / 1000;
+		mStartTime = startTime;
 	}
 	
 	public long getEndTime() {
@@ -133,7 +101,7 @@ public class CalendarEvent {
 	}
 	
 	public void setEndTime(long endTime) {
-		mEndTime = endTime / 1000;
+		mEndTime = endTime;
 	}
 	
 	public boolean getAllDay() {
@@ -148,14 +116,25 @@ public class CalendarEvent {
 		JSONObject calendarEventJson = new JSONObject();
 		
 		try {
-			calendarEventJson.put(sUidJsonKey, mUid);
-			calendarEventJson.put(sTitleJsonKey, mTitle);
-			calendarEventJson.put(sDescriptionJsonKey, mDescription);
-			calendarEventJson.put(sLocationJsonKey, mLocation);
-			calendarEventJson.put(sAttendeeEmailAddressesJsonKey, mAttendeeEmailAddresses);
-			calendarEventJson.put(sStartTimeJsonKey, mStartTime);
-			calendarEventJson.put(sEndTimeJsonKey, mEndTime);
-			calendarEventJson.put(sAllDayJsonKey, mAllDay);
+			// Normalizing for backend
+			calendarEventJson.put(sUidJsonKey, String.valueOf(this.getUid()));
+			calendarEventJson.put(sTitleJsonKey, this.getTitle());
+			calendarEventJson.put(sDescriptionJsonKey, this.getDescription());
+			calendarEventJson.put(sLocationJsonKey, this.getLocation());
+			calendarEventJson.put(sAttendeeEmailAddressesJsonKey, this.getAttendeeEmailAddresses());
+			// Normalizing for backend
+			if(this.getStartTime() == -1) {
+				calendarEventJson.put(sStartTimeJsonKey, this.getStartTime());
+			} else {
+				calendarEventJson.put(sEndTimeJsonKey, this.getEndTime() / 1000);
+			}
+			// Normalizing for backend
+			if(this.getEndTime() == -1) {
+				calendarEventJson.put(sEndTimeJsonKey, this.getEndTime());
+			} else {
+				calendarEventJson.put(sEndTimeJsonKey, this.getEndTime() / 1000);
+			}
+			calendarEventJson.put(sAllDayJsonKey, this.getAllDay());
 		} catch(JSONException exception) {
 			
 		}
