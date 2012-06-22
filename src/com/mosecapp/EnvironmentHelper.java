@@ -1,4 +1,4 @@
-package com.themosec;
+package com.mosecapp;
 
 public class EnvironmentHelper {
 	public static final int DEVELOPMENT = 0;

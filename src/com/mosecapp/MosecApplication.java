@@ -1,4 +1,4 @@
-package com.themosec;
+package com.mosecapp;
 
 import android.app.Application;
 import android.content.Context;

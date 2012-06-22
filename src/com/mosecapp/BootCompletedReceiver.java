@@ -1,4 +1,4 @@
-package com.themosec;
+package com.mosecapp;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

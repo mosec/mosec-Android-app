@@ -1,4 +1,4 @@
-package com.themosec;
+package com.mosecapp;
 
 import android.database.ContentObserver;
 import android.net.Uri;

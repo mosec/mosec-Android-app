@@ -1,4 +1,4 @@
-package com.themosec;
+package com.mosecapp;
 
 public class MosecHttpResponseHandler {
 	public void onStart() { }

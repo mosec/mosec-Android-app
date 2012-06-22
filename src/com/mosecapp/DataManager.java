@@ -1,4 +1,4 @@
-package com.themosec;
+package com.mosecapp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class DataManager {
 	public static final String DATA_TYPE_PARAMETER_NAME = "phone_data[type]";
 	public static final String DATA_PARAMETER_NAME = "phone_data[data]";
 	
-	public static final String LISTENING_ACTION = "com.themosec.actions.LISTENING_ACTION";
+	public static final String LISTENING_ACTION = "com.mosecapp.actions.LISTENING_ACTION";
 	
 	public static final String LISTENING_TO_CONTACTS_URI_KEY = "LISTENING_TO_CONTACTS_URI";
 	public static final String LISTENING_TO_CALLS_URI_KEY = "LISTENING_TO_CALLS_URI";

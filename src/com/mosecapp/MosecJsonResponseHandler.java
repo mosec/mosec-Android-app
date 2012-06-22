@@ -1,4 +1,4 @@
-package com.themosec;
+package com.mosecapp;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

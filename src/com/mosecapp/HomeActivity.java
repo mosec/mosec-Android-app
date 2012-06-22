@@ -1,4 +1,4 @@
-package com.themosec;
+package com.mosecapp;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class HomeActivity extends PreferenceActivity {
-	public static final String IN_ACTION = "com.themosec.actions.IN_ACTION";
+	public static final String IN_ACTION = "com.mosecapp.actions.IN_ACTION";
 
 	private Context mContext;
 	private Resources mResources;

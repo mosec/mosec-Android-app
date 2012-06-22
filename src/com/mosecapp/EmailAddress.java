@@ -1,4 +1,4 @@
-package com.themosec;
+package com.mosecapp;
 
 import java.util.ArrayList;
 import java.util.List;

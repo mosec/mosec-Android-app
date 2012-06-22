@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.themosec"
+    package="com.mosecapp"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.READ_CALENDAR"/>
 
     <application
-        android:name=".MosecApplication"
+        android:name="com.mosecapp.MosecApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/application_name">
         <meta-data android:name="AA_DB_NAME" android:value="mosec.db"/>
@@ -31,13 +31,13 @@
         </activity>
         <activity android:name=".WelcomeActivity"/>
         <activity android:name=".SignInActivity"/>
-        <activity android:name=".HomeActivity"/>
+        <activity android:name="com.mosecapp.HomeActivity"/>
         
         <service
 		    android:enabled="true"
-		    android:name=".SynchronizationService"/>
+		    android:name="com.mosecapp.SynchronizationService"/>
         
-        <receiver android:name=".receivers.BootCompletedReceiver">
+        <receiver android:name="com.mosecapp.receivers.BootCompletedReceiver">
         	<intent-filter>
             	<action android:name="android.intent.action.BOOT_COMPLETED"/>
         	</intent-filter>
