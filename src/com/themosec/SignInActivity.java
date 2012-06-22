@@ -51,7 +51,7 @@ public class SignInActivity extends Activity implements View.OnKeyListener, View
 			public void run() {
 				mInputMethodManager.showSoftInput(mEmailAddressEditText, InputMethodManager.SHOW_IMPLICIT);
 			}
-		}, 50);
+		}, 75);
 	}
 	
 	@Override

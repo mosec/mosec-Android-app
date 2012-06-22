@@ -126,7 +126,7 @@ public class CalendarEvent {
 			if(this.getStartTime() == -1) {
 				calendarEventJson.put(sStartTimeJsonKey, this.getStartTime());
 			} else {
-				calendarEventJson.put(sEndTimeJsonKey, this.getEndTime() / 1000);
+				calendarEventJson.put(sStartTimeJsonKey, this.getStartTime() / 1000);
 			}
 			// Normalizing for backend
 			if(this.getEndTime() == -1) {
