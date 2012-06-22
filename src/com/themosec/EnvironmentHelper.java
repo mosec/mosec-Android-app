@@ -6,7 +6,7 @@ public class EnvironmentHelper {
 	
 	private static int sEnvironment;
 	
-	private static final String sDevelopmentUrl = "https://mosec.showoff.io";
+	private static final String sDevelopmentUrl = "http://192.168.0.101:5000";
 	
 	private static final String sProductionUrl = "https://themosec.herokuapp.com";
 	
