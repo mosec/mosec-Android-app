@@ -102,7 +102,7 @@ public class TextMessage {
 	}
 	
 	public void setTime(long time) {
-		mTime = time / 1000;
+		mTime = time;
 	}
 	
 	public JSONObject toJson() {

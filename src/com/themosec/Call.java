@@ -24,14 +24,12 @@ public class Call {
 
 	private static final String sUidJsonKey = "uid";
 	private static final String sCallTypeJsonKey = "call_type";
-	private static final String sFullNameJsonKey = "full_name";
 	private static final String sPhoneNumberJsonKey = "phone_number";
 	private static final String sDurationJsonKey = "duration";
 	private static final String sTimeJsonKey = "time";
 	
 	private long mUid;
 	private int mCallType;
-	private String mFullName;
 	private String mPhoneNumber;
 	private long mDuration;
 	private long mTime;
@@ -39,7 +37,6 @@ public class Call {
 	public Call() {
 		mUid = -1;
 		mCallType = -1;
-		mFullName = null;
 		mPhoneNumber = null;
 		mDuration = -1;
 		mTime = -1;
@@ -59,14 +56,6 @@ public class Call {
 	
 	public void setCallType(int callType) {
 		mCallType = callType;
-	}
-	
-	public String getFullName() {
-		return mFullName;
-	}
-	
-	public void setFullName(String fullName) {
-		mFullName = fullName;
 	}
 	
 	public String getPhoneNumber() {
@@ -116,7 +105,6 @@ public class Call {
 				break;
 			}
 			
-			callJson.put(sFullNameJsonKey, this.getFullName());
 			callJson.put(sPhoneNumberJsonKey, this.getPhoneNumber());
 			callJson.put(sDurationJsonKey, this.getDuration());
 			// Normalizing for backend
@@ -131,12 +119,11 @@ public class Call {
 	public static List<Call> getAll(ContentResolver contentResolver) {	
 		List<Call> calls = new ArrayList<Call>();
 		
-		Cursor callsCursor = contentResolver.query(CallLog.Calls.CONTENT_URI, new String[] { CallLog.Calls._ID, CallLog.Calls.TYPE, CallLog.Calls.CACHED_NAME, CallLog.Calls.NUMBER, CallLog.Calls.DURATION, CallLog.Calls.DATE }, null, null, null);
+		Cursor callsCursor = contentResolver.query(CallLog.Calls.CONTENT_URI, new String[] { CallLog.Calls._ID, CallLog.Calls.TYPE, CallLog.Calls.NUMBER, CallLog.Calls.DURATION, CallLog.Calls.DATE }, null, null, null);
 		
 		while(callsCursor.moveToNext()) {
 			long uid = callsCursor.getLong(callsCursor.getColumnIndex(CallLog.Calls._ID));
 			int callType = Integer.parseInt(callsCursor.getString(callsCursor.getColumnIndex(CallLog.Calls.TYPE)));
-			String fullName = callsCursor.getString(callsCursor.getColumnIndex(CallLog.Calls.CACHED_NAME));
 			String phoneNumber = callsCursor.getString(callsCursor.getColumnIndex(CallLog.Calls.NUMBER));
 			long duration = callsCursor.getLong(callsCursor.getColumnIndex(CallLog.Calls.DURATION));
 			long time = callsCursor.getLong(callsCursor.getColumnIndex(CallLog.Calls.DATE));
@@ -145,7 +132,6 @@ public class Call {
 			
 			call.setUid(uid);
 			call.setCallType(callType);
-			call.setFullName(fullName);
 			call.setPhoneNumber(phoneNumber);
 			call.setDuration(duration);
 			call.setTime(time);
