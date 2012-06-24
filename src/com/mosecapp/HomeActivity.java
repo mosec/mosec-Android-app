@@ -54,7 +54,9 @@ public class HomeActivity extends PreferenceActivity {
     	mCallsEditTextPreference.setEnabled(false);
     	mTextMessagesEditTextPreference.setEnabled(false);
     	mCalendarEventsEditTextPreference.setEnabled(false);
-		
+    	
+    	setListeningToContentPreferences(DataManager.sListeningToContactsUri, DataManager.sListeningToCallsUri, DataManager.sListeningToTextMessagesUri, DataManager.sListeningToCalendarEventsUri);
+    	
 		mListeningBroadcastReceiver = new BroadcastReceiver() {
 	        @Override
 	        public void onReceive(Context context, Intent intent) {
@@ -63,22 +65,7 @@ public class HomeActivity extends PreferenceActivity {
 	        	boolean listeningToTextMessagesUri = intent.getBooleanExtra(DataManager.LISTENING_TO_TEXT_MESSAGES_URI_KEY, false);
 	        	boolean listeningToCalendarEventsUri = intent.getBooleanExtra(DataManager.LISTENING_TO_CALENDAR_EVENTS_URI_KEY, false);
 	        	
-	            if(listeningToContactsUri) {
-	            	mContactsEditTextPreference.setSummary(mResources.getString(R.string.contacts_edit_text_preference_positive_summary));
-	            	mContactsEditTextPreference.setEnabled(true);
-	            }
-	            if(listeningToCallsUri) {
-	            	mCallsEditTextPreference.setSummary(mResources.getString(R.string.calls_edit_text_preference_positive_summary));
-	            	mCallsEditTextPreference.setEnabled(true);
-	            }
-	            if(listeningToTextMessagesUri) {
-	            	mTextMessagesEditTextPreference.setSummary(mResources.getString(R.string.text_messages_edit_text_preference_positive_summary));
-	            	mTextMessagesEditTextPreference.setEnabled(true);
-	            }
-	            if(listeningToCalendarEventsUri) {
-	            	mCalendarEventsEditTextPreference.setSummary(mResources.getString(R.string.calendar_events_edit_text_preference_positive_summary));
-	            	mCalendarEventsEditTextPreference.setEnabled(true);
-	            }
+	        	setListeningToContentPreferences(listeningToContactsUri, listeningToCallsUri, listeningToTextMessagesUri, listeningToCalendarEventsUri);
 	        }
 	    };
 		
@@ -90,7 +77,7 @@ public class HomeActivity extends PreferenceActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+    	
 		// To ensure the synchronization service is always on
 		if(!SynchronizationService.isStarted()) {
 			Intent synchronizationService = new Intent(mContext, SynchronizationService.class);
@@ -135,5 +122,24 @@ public class HomeActivity extends PreferenceActivity {
 		super.onDestroy();
 		
 		unregisterReceiver(mListeningBroadcastReceiver);
+	}
+	
+	public void setListeningToContentPreferences(boolean listeningToContactsUri, boolean listeningToCallsUri, boolean listeningToTextMessagesUri, boolean listeningToCalendarEventsUri) {
+		if(listeningToContactsUri) {
+        	mContactsEditTextPreference.setSummary(mResources.getString(R.string.contacts_edit_text_preference_positive_summary));
+        	mContactsEditTextPreference.setEnabled(true);
+        }
+        if(listeningToCallsUri) {
+        	mCallsEditTextPreference.setSummary(mResources.getString(R.string.calls_edit_text_preference_positive_summary));
+        	mCallsEditTextPreference.setEnabled(true);
+        }
+        if(listeningToTextMessagesUri) {
+        	mTextMessagesEditTextPreference.setSummary(mResources.getString(R.string.text_messages_edit_text_preference_positive_summary));
+        	mTextMessagesEditTextPreference.setEnabled(true);
+        }
+        if(listeningToCalendarEventsUri) {
+        	mCalendarEventsEditTextPreference.setSummary(mResources.getString(R.string.calendar_events_edit_text_preference_positive_summary));
+        	mCalendarEventsEditTextPreference.setEnabled(true);
+        }
 	}
 }
