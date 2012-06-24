@@ -37,7 +37,7 @@
 		    android:enabled="true"
 		    android:name="com.mosecapp.SynchronizationService"/>
         
-        <receiver android:name="com.mosecapp.receivers.BootCompletedReceiver">
+        <receiver android:name="com.mosecapp.BootCompletedReceiver">
         	<intent-filter>
             	<action android:name="android.intent.action.BOOT_COMPLETED"/>
         	</intent-filter>
