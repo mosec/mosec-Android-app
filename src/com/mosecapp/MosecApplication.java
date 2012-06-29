@@ -19,7 +19,7 @@ public class MosecApplication extends Application {
 		mContext = (Context)this;
 
         ActiveAndroid.initialize(mContext);
-		EnvironmentHelper.setEnvironment(EnvironmentHelper.DEVELOPMENT);
+		EnvironmentHelper.setEnvironment(EnvironmentHelper.PRODUCTION);
 		MosecClient.setup(mContext);
 	}
 	

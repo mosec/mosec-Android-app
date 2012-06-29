@@ -8,7 +8,7 @@ public class EnvironmentHelper {
 	
 	private static final String sDevelopmentUrl = "http://192.168.0.101:5000";
 	
-	private static final String sProductionUrl = "https://mosecapp.com";
+	private static final String sProductionUrl = "https://mosecapp.herokuapp.com";
 	
 	public static void setEnvironment(int environment) {
 		switch(environment) {
