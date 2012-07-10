@@ -1,4 +1,4 @@
-package com.mosecapp;
+package com.setradar;
 
 import java.util.List;
 
@@ -10,23 +10,23 @@ import android.os.AsyncTask;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-public class SynchronizeContactsTask extends AsyncTask<ContentResolver, Void, Void> {
+public class SynchronizeTextMessagesTask extends AsyncTask<ContentResolver, Void, Void> {
 	@Override
 	protected Void doInBackground(ContentResolver... contentResolvers) {
 		ContentResolver contentResolver = contentResolvers[0];
 		
-		List<Contact> contacts = Contact.getAll(contentResolver, true);
+		List<TextMessage> textMessages = TextMessage.getAll(contentResolver);
 		
-		JSONArray contactsJson = Contact.toJsonFromContacts(contacts);
+		JSONArray textMessagesJson = TextMessage.toJsonFromTextMessages(textMessages);
 		
 		RequestParams parameters = new RequestParams();
 		
-		String contactsJsonString = contactsJson.toString();
+		String textMessagesJsonString = textMessagesJson.toString();
+
+		parameters.put(DataManager.DATA_TYPE_PARAMETER_NAME, TextMessage.TYPE);
+		parameters.put(DataManager.DATA_PARAMETER_NAME, textMessagesJsonString);
 		
-		parameters.put(DataManager.DATA_TYPE_PARAMETER_NAME, Contact.TYPE);
-		parameters.put(DataManager.DATA_PARAMETER_NAME, contactsJsonString);
-		
-		MosecClient.post(DataManager.SYNCHRONIZE_ROUTE, parameters, new AsyncHttpResponseHandler() {
+		RadarClient.post(DataManager.SYNCHRONIZE_ROUTE, parameters, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
 				

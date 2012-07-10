@@ -1,4 +1,4 @@
-package com.mosecapp;
+package com.setradar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +34,14 @@ public class DataManager {
     private static ContentResolver sContentResolver;
     
     private static List<Uri> sUris;
-	private static List<MosecContentObserver> sContentObservers;
+	private static List<RadarContentObserver> sContentObservers;
  
     public static void initialize(Context context) {
 		sContext = context;
 		sContentResolver = sContext.getContentResolver();
 		
 		sUris = new ArrayList<Uri>();
-		sContentObservers = new ArrayList<MosecContentObserver>();
+		sContentObservers = new ArrayList<RadarContentObserver>();
 		
 		for(int i = 0; i < URIS_TO_BE_TESTED.length; i++) {
 			Cursor uriCursor = null;
@@ -64,13 +64,13 @@ public class DataManager {
 			
 			Uri uri = sUris.get(i);
 			
-			MosecContentObserver mosecContentObserver = new MosecContentObserver(uri, handler);
+			RadarContentObserver mosecContentObserver = new RadarContentObserver(uri, handler);
 			
 			sContentObservers.add(mosecContentObserver);
 		}
 		
 		for(int i = 0; i < sContentObservers.size(); i++) {
-			MosecContentObserver mosecContentObserver = sContentObservers.get(i);
+			RadarContentObserver mosecContentObserver = sContentObservers.get(i);
 			
 			Uri uri = sUris.get(i);
 			
@@ -101,7 +101,7 @@ public class DataManager {
     
     public static void destroy() {
     	for(int i = 0; i < sContentObservers.size(); i++) {
-			MosecContentObserver mosecContentObserver = sContentObservers.get(i);
+			RadarContentObserver mosecContentObserver = sContentObservers.get(i);
 			
             sContentResolver.unregisterContentObserver(mosecContentObserver);
     	}

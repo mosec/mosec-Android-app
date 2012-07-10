@@ -1,4 +1,6 @@
-package com.mosecapp;
+package com.setradar;
+
+import com.setradar.R;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -1,6 +1,6 @@
-package com.mosecapp;
+package com.setradar;
 
-public class MosecHttpResponseHandler {
+public class RadarHttpResponseHandler {
 	public void onStart() { }
 	
 	public void onSuccess(String response) { }

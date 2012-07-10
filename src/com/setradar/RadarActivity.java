@@ -1,11 +1,11 @@
-package com.mosecapp;
+package com.setradar;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class MosecActivity extends Activity {
+public class RadarActivity extends Activity {
 	private Context mContext;
 	
     @Override

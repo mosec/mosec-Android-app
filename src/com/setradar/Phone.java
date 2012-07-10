@@ -1,4 +1,4 @@
-package com.mosecapp;
+package com.setradar;
 
 import android.content.ContentResolver;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.mosecapp;
+package com.setradar;
 
 public class EnvironmentHelper {
 	public static final int DEVELOPMENT = 0;

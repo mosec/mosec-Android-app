@@ -1,4 +1,4 @@
-package com.mosecapp;
+package com.setradar;
 
 import java.util.List;
 
@@ -76,7 +76,7 @@ public class User extends Model {
 		mPassword = password;
 	}
 	
-	public void signInInBackground(Context context, final MosecJsonResponseHandler responseHandler) {
+	public void signInInBackground(Context context, final RadarJsonResponseHandler responseHandler) {
 		RequestParams parameters = new RequestParams();
 		
 		parameters.put(sUserSessionEmailAddressParameterName, this.getEmailAddress());
@@ -85,7 +85,7 @@ public class User extends Model {
 		parameters.put(Phone.UID_PARAMETER_NAME, Phone.getInstance(context).getUid());
 		parameters.put(Phone.OPERATING_SYSTEM_PARAMETER_NAME, Phone.OPERATING_SYSTEM);
 		
-		MosecClient.post(SIGN_IN_ROUTE, parameters, new JsonHttpResponseHandler() {
+		RadarClient.post(SIGN_IN_ROUTE, parameters, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject userJson) {
 				try {
@@ -115,7 +115,7 @@ public class User extends Model {
 	}
 	
 	public void logout() {
-		MosecClient.clearCookies();
+		RadarClient.clearCookies();
 
 		deleteAll();
 	}

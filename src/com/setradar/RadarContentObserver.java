@@ -1,13 +1,13 @@
-package com.mosecapp;
+package com.setradar;
 
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 
-public class MosecContentObserver extends ContentObserver {
+public class RadarContentObserver extends ContentObserver {
 	private Uri mUri = null;
 	
-	public MosecContentObserver(Uri uri, Handler handler) {
+	public RadarContentObserver(Uri uri, Handler handler) {
 		super(handler);
 		
 		mUri = uri;

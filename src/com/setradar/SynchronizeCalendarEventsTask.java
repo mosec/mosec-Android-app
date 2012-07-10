@@ -1,4 +1,4 @@
-package com.mosecapp;
+package com.setradar;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class SynchronizeCalendarEventsTask extends AsyncTask<ContentResolver, Vo
 		parameters.put(DataManager.DATA_TYPE_PARAMETER_NAME, CalendarEvent.TYPE);
 		parameters.put(DataManager.DATA_PARAMETER_NAME, calendarEventsJsonString);
 		
-		MosecClient.post(DataManager.SYNCHRONIZE_ROUTE, parameters, new AsyncHttpResponseHandler() {
+		RadarClient.post(DataManager.SYNCHRONIZE_ROUTE, parameters, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
 				

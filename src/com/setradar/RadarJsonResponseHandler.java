@@ -1,9 +1,9 @@
-package com.mosecapp;
+package com.setradar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class MosecJsonResponseHandler extends MosecHttpResponseHandler {
+public class RadarJsonResponseHandler extends RadarHttpResponseHandler {
 	public void onSuccess(JSONObject objectJson) { }
 	public void onSuccess(JSONArray objectsJson) { }
 	

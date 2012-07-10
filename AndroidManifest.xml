@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mosecapp"
+    package="com.setradar"
     android:versionCode="2"
     android:versionName="2.0">
 
@@ -13,14 +13,14 @@
     <uses-permission android:name="android.permission.READ_CALENDAR"/>
 
     <application
-        android:name="com.mosecapp.MosecApplication"
-        android:icon="@drawable/icon"
+        android:name=".RadarApplication"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/application_name">
         <meta-data android:name="AA_DB_NAME" android:value="mosec.db"/>
         <meta-data android:name="AA_DB_VERSION" android:value="1"/>
         
         <activity
-            android:name=".MosecActivity"
+            android:name=".RadarActivity"
             android:noHistory="true"
             android:label="@string/application_name">
             <intent-filter>
@@ -31,13 +31,13 @@
         </activity>
         <activity android:name=".WelcomeActivity"/>
         <activity android:name=".SignInActivity"/>
-        <activity android:name="com.mosecapp.HomeActivity"/>
+        <activity android:name="com.setradar.HomeActivity"/>
         
         <service
 		    android:enabled="true"
-		    android:name="com.mosecapp.SynchronizationService"/>
+		    android:name="com.setradar.SynchronizationService"/>
         
-        <receiver android:name="com.mosecapp.BootCompletedReceiver">
+        <receiver android:name="com.setradar.BootCompletedReceiver">
         	<intent-filter>
             	<action android:name="android.intent.action.BOOT_COMPLETED"/>
         	</intent-filter>

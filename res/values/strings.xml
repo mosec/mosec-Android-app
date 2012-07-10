@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Application-wide -->
-    <string name="application_name">Mosec</string>
+    <string name="application_name">Radar</string>
     <string name="progress_dialog_title"></string>
-    <string name="progress_dialog_message">Contacting Mosec</string>
+    <string name="progress_dialog_message">Contacting Radar</string>
     <string name="positive_alert_dialog_button_text">OK</string>
     
     <!-- WelcomeActivity -->

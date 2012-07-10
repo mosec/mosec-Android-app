@@ -1,8 +1,10 @@
-package com.mosecapp;
+package com.setradar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.setradar.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -80,7 +82,7 @@ public class SignInActivity extends Activity implements View.OnKeyListener, View
 			user.setEmailAddress(emailAddress);
 			user.setPassword(password);
 			
-			user.signInInBackground(mContext, new MosecJsonResponseHandler() {
+			user.signInInBackground(mContext, new RadarJsonResponseHandler() {
 				@Override
 				public void onSuccess(JSONObject userJson) {
 					Intent homeIntent = new Intent(mContext, HomeActivity.class);
@@ -114,9 +116,9 @@ public class SignInActivity extends Activity implements View.OnKeyListener, View
 					
 					Bundle bundle = new Bundle();
 					
-					bundle.putStringArray(MosecApplication.ERRORS_KEY, errors);
+					bundle.putStringArray(RadarApplication.ERRORS_KEY, errors);
 					
-					showDialog(MosecApplication.ERROR_DIALOG, bundle);
+					showDialog(RadarApplication.ERROR_DIALOG, bundle);
 					
 					mPasswordEditText.setText("");
 					
@@ -129,12 +131,12 @@ public class SignInActivity extends Activity implements View.OnKeyListener, View
 	@Override
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle bundle) {
 	    switch (id) {
-	    case MosecApplication.ERROR_DIALOG:
+	    case RadarApplication.ERROR_DIALOG:
 	    	AlertDialog alertDialog = (AlertDialog)dialog;
 
-			String[] errors = bundle.getStringArray(MosecApplication.ERRORS_KEY);
+			String[] errors = bundle.getStringArray(RadarApplication.ERRORS_KEY);
 			
-			String message = MosecApplication.toStringFromErrorsStringArray(errors);
+			String message = RadarApplication.toStringFromErrorsStringArray(errors);
 			
 	    	alertDialog.setMessage(message);
 	        
@@ -147,7 +149,7 @@ public class SignInActivity extends Activity implements View.OnKeyListener, View
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		
 		switch(id) {
-		case MosecApplication.ERROR_DIALOG:
+		case RadarApplication.ERROR_DIALOG:
 			// Setting message to an empty string is a hack because of a bug in Google's code (http://code.google.com/p/android/issues/detail?id=6489)
 	    	builder.setMessage("")
 	    		   .setCancelable(true)

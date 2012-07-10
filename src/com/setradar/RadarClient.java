@@ -1,4 +1,4 @@
-package com.mosecapp;
+package com.setradar;
 
 import android.content.Context;
 
@@ -7,7 +7,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
-public class MosecClient {
+public class RadarClient {
 	private static AsyncHttpClient sHttpClient;
 	private static PersistentCookieStore sCookieStore;
 	

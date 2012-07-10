@@ -1,11 +1,11 @@
-package com.mosecapp;
+package com.setradar;
 
 import android.app.Application;
 import android.content.Context;
 
 import com.activeandroid.ActiveAndroid;
 
-public class MosecApplication extends Application {
+public class RadarApplication extends Application {
 	public static final String ERRORS_KEY = "ERRORS";
 	
 	public static final int ERROR_DIALOG = 1;
@@ -20,7 +20,7 @@ public class MosecApplication extends Application {
 
         ActiveAndroid.initialize(mContext);
 		EnvironmentHelper.setEnvironment(EnvironmentHelper.PRODUCTION);
-		MosecClient.setup(mContext);
+		RadarClient.setup(mContext);
 	}
 	
 	public static String toStringFromErrorsStringArray(String[] errors) {
