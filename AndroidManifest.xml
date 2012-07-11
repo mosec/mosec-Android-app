@@ -16,7 +16,7 @@
         android:name=".RadarApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/application_name">
-        <meta-data android:name="AA_DB_NAME" android:value="mosec.db"/>
+        <meta-data android:name="AA_DB_NAME" android:value="radar.db"/>
         <meta-data android:name="AA_DB_VERSION" android:value="1"/>
         
         <activity

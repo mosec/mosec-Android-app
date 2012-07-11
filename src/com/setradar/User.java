@@ -18,7 +18,6 @@ import com.loopj.android.http.RequestParams;
 @Table(name = "Users")
 public class User extends Model {
 	private static final String sIdJsonKey = "id";
-	private static final String sFullNameJsonKey = "full_name";
 	private static final String sEmailAddressJsonKey = "email_address";
 	
 	private static final String SIGN_IN_ROUTE = "/user_session.json";
@@ -29,9 +28,6 @@ public class User extends Model {
 	@Column(name = "BackendId")
 	private long mBackendId;
 	
-	@Column(name = "FullName")
-	private String mFullName;
-	
 	@Column(name = "EmailAddress")
 	private String mEmailAddress;
 	
@@ -39,7 +35,6 @@ public class User extends Model {
 	
 	public User() {
 		mBackendId = -1;
-		mFullName = null;
 		mEmailAddress = null;
 		mPassword = null;
 	}
@@ -50,14 +45,6 @@ public class User extends Model {
 	
 	public void setBackendId(long backendId) {
 		mBackendId = backendId;
-	}
-	
-	public String getFullName() {
-		return mFullName;
-	}
-	
-	public void setFullName(String fullName) {
-		mFullName = fullName;
 	}
 	
 	public String getEmailAddress() {
@@ -90,13 +77,11 @@ public class User extends Model {
 			public void onSuccess(JSONObject userJson) {
 				try {
 					long backendId = userJson.getLong(sIdJsonKey);
-					String fullName = userJson.getString(sFullNameJsonKey);
 					String emailAddress = userJson.getString(sEmailAddressJsonKey);
 
 					User user = new User();
 
 					user.setBackendId(backendId);
-					user.setFullName(fullName);
 					user.setEmailAddress(emailAddress);
 					
 					user.save();

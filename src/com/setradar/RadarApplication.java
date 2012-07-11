@@ -19,7 +19,7 @@ public class RadarApplication extends Application {
 		mContext = (Context)this;
 
         ActiveAndroid.initialize(mContext);
-		EnvironmentHelper.setEnvironment(EnvironmentHelper.PRODUCTION);
+		EnvironmentHelper.setEnvironment(EnvironmentHelper.DEVELOPMENT);
 		RadarClient.setup(mContext);
 	}
 	
